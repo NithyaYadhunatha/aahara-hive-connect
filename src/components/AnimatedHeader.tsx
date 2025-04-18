@@ -46,14 +46,29 @@ const AnimatedHeader = () => {
             transition={{ duration: 0.5 }}
           >
             <Link to="/" className="flex items-center gap-2">
-              <svg 
-                className="w-8 h-8 text-bumblebee-yellow animate-float-bee" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
-              >
-                <path d="M8 16s1.5-2 4-2 4 2 4 2M9 9h.01M15 9h.01M12 8c0-2.2-1.8-4-4-4H5a8 8 0 0 0 4 15h6a8 8 0 0 0 4-15h-3c-2.2 0-4 1.8-4 4" />
-              </svg>
-              <span className="text-2xl font-bold text-bumblebee-cream font-playfair">Aahara</span>
+              <div className="relative w-10 h-10">
+                <svg 
+                  className="w-10 h-10 text-bumblebee-yellow absolute animate-float-bee" 
+                  viewBox="0 0 24 24" 
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M8 16s1.5-2 4-2 4 2 4 2"/>
+                  <line x1="9" y1="9" x2="9.01" y2="9"/>
+                  <line x1="15" y1="9" x2="15.01" y2="9"/>
+                  <path d="M12 8c0-2.2-1.8-4-4-4H5a8 8 0 0 0 4 15h6a8 8 0 0 0 4-15h-3c-2.2 0-4 1.8-4 4"/>
+                </svg>
+                <div className="absolute w-full h-full flex items-center justify-center">
+                  <span className="text-2xl font-bold text-bumblebee-orange -mt-0.5">A</span>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-bumblebee-cream font-playfair tracking-wider">Aahara</span>
+                <span className="text-xs text-bumblebee-yellow/80 -mt-1">Bridging Hope</span>
+              </div>
             </Link>
           </motion.div>
 

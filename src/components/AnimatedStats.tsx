@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { 
@@ -14,7 +15,7 @@ type CounterProps = {
   prefix?: string;
   suffix?: string;
   title: string;
-  icon: string;
+  icon: React.ReactNode;
   inView: boolean;
 };
 
@@ -67,7 +68,7 @@ const Counter = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
     >
-      <div className="text-5xl mb-2 text-bumblebee-yellow font-bold">{icon}</div>
+      <div className="mb-4">{icon}</div>
       <div className="text-4xl font-bold text-bumblebee-orange mb-2 font-playfair">
         {prefix}{count.toLocaleString()}{suffix}
       </div>
@@ -95,7 +96,7 @@ const AnimatedStats = () => {
         background: `linear-gradient(135deg, #DFAF2B 0%, #F0A202 100%)`,
       }}
     >
-      <div className="absolute inset-0 bg-honeycomb-pattern opacity-10 z-0" />
+      <div className="absolute inset-0 bg-honeycomb-pattern opacity-15 z-0" />
       
       <div className="container mx-auto relative z-10">
         <motion.div 
@@ -104,22 +105,34 @@ const AnimatedStats = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-bumblebee-black mb-4 font-playfair">Our Impact</h2>
-          <div className="w-24 h-1 bg-bumblebee-cream mx-auto rounded-full" />
+          <h2 className="text-3xl md:text-5xl font-bold text-bumblebee-black mb-6 font-playfair">Our Impact</h2>
+          <p className="text-lg md:text-xl text-bumblebee-black/80 max-w-2xl mx-auto mb-8">Every meal shared, every volunteer hour, and every partnership creates a meaningful difference in our community.</p>
+          <div className="w-24 h-1 bg-bumblebee-cream mx-auto rounded-full mb-8" />
         </motion.div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
           {stats.map((stat, index) => (
             <Counter
               key={index}
               end={stat.value}
               delay={index * 0.2}
               title={stat.title}
-              icon={<stat.icon className="text-5xl text-bumblebee-yellow" />}
+              icon={<stat.icon className="w-16 h-16 mx-auto text-bumblebee-black" />}
               inView={isInView}
             />
           ))}
         </div>
+        
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
+          <Link className="inline-block bg-bumblebee-black text-bumblebee-cream font-semibold py-3 px-8 rounded-full hover:bg-bumblebee-black/90 transition-all duration-300 shadow-lg hover:shadow-xl" to="/impact">
+            See Our Full Impact Report
+          </Link>
+        </motion.div>
       </div>
       
       <motion.div

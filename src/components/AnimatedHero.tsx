@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -10,33 +10,6 @@ import {
 } from 'lucide-react';
 
 const AnimatedHero = () => {
-  const beeTrailRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!beeTrailRef.current) return;
-      
-      const trail = document.createElement('div');
-      trail.className = 'cursor-trail animate-bee-trail';
-      trail.style.left = `${e.clientX}px`;
-      trail.style.top = `${e.clientY}px`;
-      
-      beeTrailRef.current.appendChild(trail);
-      
-      setTimeout(() => {
-        if (trail && beeTrailRef.current?.contains(trail)) {
-          beeTrailRef.current.removeChild(trail);
-        }
-      }, 1500);
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
   const ctaButtons = [
     { name: 'Donate Food', href: '/donate', icon: DollarSign, delay: 0.1 },
     { name: 'Request Food', href: '/request', icon: Download, delay: 0.2 },
@@ -55,8 +28,6 @@ const AnimatedHero = () => {
 
   return (
     <section className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden bg-gradient-to-b from-bumblebee-black via-bumblebee-black to-bumblebee-brown/90">
-      <div ref={beeTrailRef} className="absolute inset-0 pointer-events-none" />
-      
       <motion.div
         className="absolute text-3xl opacity-50 z-0"
         initial={{ x: 0, y: 0, rotate: 0 }}
@@ -72,7 +43,22 @@ const AnimatedHero = () => {
           ease: "easeInOut" 
         }}
       >
-        🐝
+        <svg
+          width="40"
+          height="40"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          stroke="currentColor"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-bumblebee-yellow"
+        >
+          <path d="M8 16s1.5-2 4-2 4 2 4 2"/>
+          <line x1="9" y1="9" x2="9.01" y2="9"/>
+          <line x1="15" y1="9" x2="15.01" y2="9"/>
+          <path d="M12 8c0-2.2-1.8-4-4-4H5a8 8 0 0 0 4 15h6a8 8 0 0 0 4-15h-3c-2.2 0-4 1.8-4 4"/>
+        </svg>
       </motion.div>
       
       <div className="container mx-auto relative z-10">
