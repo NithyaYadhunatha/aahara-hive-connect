@@ -1,7 +1,13 @@
-
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { 
+  DollarSign, 
+  Users, 
+  Download, 
+  Clipboard, 
+  Lock 
+} from 'lucide-react';
 
 const AnimatedHero = () => {
   const beeTrailRef = useRef<HTMLDivElement>(null);
@@ -10,16 +16,13 @@ const AnimatedHero = () => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!beeTrailRef.current) return;
       
-      // Create a new bee trail element
       const trail = document.createElement('div');
       trail.className = 'cursor-trail animate-bee-trail';
       trail.style.left = `${e.clientX}px`;
       trail.style.top = `${e.clientY}px`;
       
-      // Append the trail element to the container
       beeTrailRef.current.appendChild(trail);
       
-      // Remove the trail element after animation completes
       setTimeout(() => {
         if (trail && beeTrailRef.current?.contains(trail)) {
           beeTrailRef.current.removeChild(trail);
@@ -35,11 +38,11 @@ const AnimatedHero = () => {
   }, []);
 
   const ctaButtons = [
-    { name: 'Donate Food', href: '/donate', icon: '🍛', delay: 0.1 },
-    { name: 'Request Food', href: '/request', icon: '📥', delay: 0.2 },
-    { name: 'Join as Volunteer', href: '/volunteer', icon: '🧍‍♀️', delay: 0.3 },
-    { name: 'NGO Registration', href: '/ngo', icon: '🧾', delay: 0.4 },
-    { name: 'Admin Login', href: '/admin', icon: '🔐', delay: 0.5 },
+    { name: 'Donate Food', href: '/donate', icon: DollarSign, delay: 0.1 },
+    { name: 'Request Food', href: '/request', icon: Download, delay: 0.2 },
+    { name: 'Join as Volunteer', href: '/volunteer', icon: Users, delay: 0.3 },
+    { name: 'NGO Registration', href: '/ngo', icon: Clipboard, delay: 0.4 },
+    { name: 'Admin Login', href: '/admin', icon: Lock, delay: 0.5 },
   ];
 
   const beePath = [
@@ -54,7 +57,6 @@ const AnimatedHero = () => {
     <section className="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden bg-gradient-to-b from-bumblebee-black via-bumblebee-black to-bumblebee-brown/90">
       <div ref={beeTrailRef} className="absolute inset-0 pointer-events-none" />
       
-      {/* Animated Bee */}
       <motion.div
         className="absolute text-3xl opacity-50 z-0"
         initial={{ x: 0, y: 0, rotate: 0 }}
@@ -130,7 +132,7 @@ const AnimatedHero = () => {
                   to={button.href}
                   className="flex flex-col items-center justify-center w-full bg-gradient-to-r from-bumblebee-yellow to-bumblebee-orange text-bumblebee-black font-semibold py-3 px-4 rounded-lg shadow-lg shadow-bumblebee-orange/20 hover:shadow-bumblebee-orange/40 transition-all duration-300"
                 >
-                  <span className="text-2xl mb-1">{button.icon}</span>
+                  <button.icon className="text-2xl mb-1 w-6 h-6" />
                   <span>{button.name}</span>
                 </Link>
               </motion.div>
@@ -145,7 +147,6 @@ const AnimatedHero = () => {
           />
         </motion.div>
         
-        {/* Background Honeycomb Pattern */}
         <div className="absolute inset-0 bg-honeycomb-pattern opacity-10 z-0" />
       </div>
     </section>

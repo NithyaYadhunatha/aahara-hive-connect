@@ -1,6 +1,11 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { 
+  Utensils, 
+  Users, 
+  Building, 
+  MapPin 
+} from 'lucide-react';
 
 type CounterProps = {
   end: number;
@@ -73,10 +78,10 @@ const Counter = ({
 
 const AnimatedStats = () => {
   const stats = [
-    { icon: '🍱', value: 150000, title: 'Meals Delivered' },
-    { icon: '🙋‍♂️', value: 500, title: 'Active Volunteers' },
-    { icon: '🏢', value: 50, title: 'Partner NGOs' },
-    { icon: '🌍', value: 25, title: 'Cities Covered' },
+    { icon: Utensils, value: 150000, title: 'Meals Delivered' },
+    { icon: Users, value: 500, title: 'Active Volunteers' },
+    { icon: Building, value: 50, title: 'Partner NGOs' },
+    { icon: MapPin, value: 25, title: 'Cities Covered' },
   ];
   
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -110,14 +115,13 @@ const AnimatedStats = () => {
               end={stat.value}
               delay={index * 0.2}
               title={stat.title}
-              icon={stat.icon}
+              icon={<stat.icon className="text-5xl text-bumblebee-yellow" />}
               inView={isInView}
             />
           ))}
         </div>
       </div>
       
-      {/* Decorative elements */}
       <motion.div
         className="absolute -bottom-4 left-0 w-full h-8"
         style={{
